@@ -70,3 +70,12 @@
 	list-style-type: none;
 	padding: 5px;
 }
+#answerDiv p{
+	display: block;
+}
+#answerDiv{
+	background: #d4edda;
+	padding: 5px;
+	margin-bottom: 5px;
+	color:#155724;
+}

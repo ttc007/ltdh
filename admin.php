@@ -57,9 +57,9 @@
 			    	<h3>Physics</h3>
 			    </div>
 		    </div>
-		    <div class="card bg-light text-dark text-center" onclick="renderScreen('Nhờ giải hộ')">
+		    <div class="card bg-light text-dark text-center" onclick="renderScreen('Relief valve')">
 			    <div class="card-body">
-			    	<h3>Nhờ giải hộ</h3>
+			    	<h3>Relief valve</h3>
 			    </div>
 		    </div>
 		</div>
