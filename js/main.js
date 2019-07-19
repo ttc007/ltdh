@@ -28,6 +28,8 @@ function renderScreen(scrName, scrTitle){
 			    </div>
 			</div>
 		`);
+	} else if(scrName=='help'){
+		$("#app").append(`Chúng tôi đang phát triển 1 con bot siêu thông minh có thể giải mọi bài toán cấp 3.`);
 	} else {
 		$("#app").append(`
 			<div class='card-columns'>
@@ -83,13 +85,19 @@ function renderExercise(scrName){
 
 			$.each($(".questionDiv li"), function(i,v){
 				$(v).attr("title", "Chọn đáp án này");
+				
+				var liWidth = parseFloat($(v).css('width'));
+				var ulWidth = parseFloat($(v).closest( "ul" ).css('width'));
+				if(liWidth>ulWidth/2){
+					$(v).css('width', '98%');
+				} else if(liWidth>ulWidth/4){
+					$(v).css('width', '48%');
+				}
+
+
 				var isClickTrue = false;
 				var border = '#f5c6cb';
-				if(data.choose=="A" && i==0 
-				  ||data.choose=="B" && i==1
-				  ||data.choose=="C" && i==2
-				  ||data.choose=="D" && i==3
-				){
+				if(data.choose==i){
 					isClickTrue = true;
 					border = '#c3e6cb';
 				}
@@ -119,14 +127,19 @@ function answerAction(answer, dataAnswer, scrName){
 		msg = "Chính xác";
 	}
 	var divSuccess = $(`
-		<div class="alert `+ className +` alert-dismissible">
-	  		<strong>`+ msg +`!</strong><br>
-	  		<div id='answerDiv' class='mt-2'>
-	  			`+dataAnswer+`
-	  		</div>
-	  		<div class='w-100 text-right'>
-				<a class='btn btn-info text-white' onclick='renderExercise("`+scrName+`")'>
-				<i class="fa fa-arrow-right" aria-hidden="true" title='Câu tiếp theo'></i></a>
+		<div>
+			<div class="alert `+ className +` alert-dismissible">
+		  		<strong>`+ msg +`!</strong><br>
+			</div>
+			<div id='answerDiv'>
+				<div class='mt-2'>
+					<b>Đáp án:</b>
+		  			`+dataAnswer+`
+		  		</div>
+		  		<div class='w-100 text-right'>
+					<a class='btn btn-info text-white' onclick='renderExercise("`+scrName+`")'>
+					<i class="fa fa-arrow-right" aria-hidden="true" title='Câu tiếp theo'></i></a>
+				</div>
 			</div>
 		</div>
 	`);
@@ -186,7 +199,7 @@ function renderExamination(scrName){
 			dataType:'json',
 			success:function(data){
 				$.each(data, function(j, row){
-					arrayResult.push(row.question);
+					arrayResult.push(row.id+"|"+row.question);
 				});
 			}
 		});
@@ -196,12 +209,15 @@ function renderExamination(scrName){
 	$("#app").empty();
 	$("#app").append(`
 		<div class='questionDiv'>
+			<div class='w-100 text-center my-5'>
+				<h4>Đề ngẫu nhiên</h4>
+			</div>
 			<div id='examinationDiv'></div>
-			<div id='msgQuestion' class='mt-3'></div>
+			<div id='msgResult' class='mt-5'></div>
 			<div class='mt-3' id='nextExerciseDiv'>
 				<div class='w-100 text-right mt-2'>
 					<a class='btn btn-info text-white' onclick='getExaminationResult("`+scrName+`")'>
-					Nộ bài</a>
+					Nộp bài</a>
 				</div>
 			</div>
 		</div>
@@ -209,7 +225,28 @@ function renderExamination(scrName){
 		
 	`);
 	$.each(arrayResult, function(j, question){
-		$("#examinationDiv").append("<b>Câu"+(j+1)+". </b>"+question);
+		var id = question.split("|")[0];
+		var divQuestion = $("<div class='question' id='question"+j+"'><b>Câu"+(j+1)+". </b>"
+			+question.split("|")[1]+"</div>");
+		$("#examinationDiv").append(divQuestion);
+
+
+		$.each($("#question"+j+" li"), function(k, v){
+			var liWidth = parseFloat($(v).css('width'));
+			var ulWidth = parseFloat($(v).closest( "ul" ).css('width'));
+			if(liWidth>ulWidth/2){
+				$(v).css('width', '98%');
+			} else if(liWidth>ulWidth/4){
+				$(v).css('width', '48%');
+			}
+			$(v).attr("id", id);
+			$(v).attr("choose", k);
+			$(v).attr("parent", "question"+j);
+			$(v).click(function(){
+				$("#question"+j+" li").removeClass('questionChoose');
+				$(v).addClass("questionChoose");
+			});
+		});
 	});
 
 	setTimeout(function(){
@@ -226,4 +263,46 @@ function shuffle(a) {
         a[j] = x;
     }
     return a;
+}
+
+function getExaminationResult(scrName){
+	var count = 0;
+	var sum = $(".questionChoose").length;
+	$.each($(".questionChoose"), function(i,v){
+		$.ajax({
+			url:"api/getQuestion.php",
+			type:"GET",
+			data:{
+				id:$(v).attr("id")
+			},
+			async:false,
+			dataType:'json',
+			success:function(data){
+				var choose = $(v).attr("choose");
+				var result = false;
+				console.log(data.choose);
+				if(data.choose==choose){
+					result = true;
+					count++;
+					$(v).css("border-color", "#28a745");
+				} else {
+					var divQuestion = $(v).attr('parent');
+					$("#"+divQuestion +" [choose="+data.choose+"]").css("border-color", "#28a74554");
+					$(v).css("border-color", "red");
+				}
+			}
+		});
+	});
+	var point = (count/sum)*10;
+	point = Math.round(point * 100) / 100;
+	$("#msgResult").append("Kết quả: "+count+"/"+sum+"<br>Điểm: <span style='color:red'>"+point+"</span>");
+	$("#msgResult").css("display", "block");
+	$("#nextExerciseDiv").empty();
+	$("#nextExerciseDiv").append(`
+		<div class='w-100 text-right mt-2'>
+			<a class='btn btn-info text-white' onclick="renderScreen('home', 'Home Page')">
+			Quay về</a>
+		</div>
+	`);
+
 }

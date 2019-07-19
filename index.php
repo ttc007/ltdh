@@ -18,7 +18,7 @@
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-			  	<a class="nav-link" href="#" onclick="renderScreen('home', 'My First Bootstrap Page')"><span class="fa fa-home"></span></a>
+			  	<a class="nav-link" href="#" onclick="renderScreen('home', 'Trang chủ')"><span class="fa fa-home"></span></a>
 			</li>
 			<li class="nav-item">
 			  	<a class="nav-link" href="#" onclick="renderScreen('Chemistry', 'Môn Hóa')">Môn Hóa</a>
@@ -30,13 +30,13 @@
 			  	<a class="nav-link" href="#" onclick="renderScreen('', 'Môn Toán')">Môn Toán</a>
 			</li>
 			<li class="nav-item">
-			  	<a class="nav-link" href="#" onclick="renderScreen('', 'Nhờ giải hộ')">Nhờ giải hộ</a>
+			  	<a class="nav-link" href="#" onclick="renderScreen('help', 'Nhờ giải hộ')">Nhờ giải hộ</a>
 			</li>
 		</ul>
 	</nav>
 	<div class="jumbotron text-center">
-	  <h1 id='screenTitle'>My First Bootstrap Page</h1>
-	  <p>Resize this responsive page to see the effect!</p> 
+	  <h1 id='screenTitle'>Trang chủ</h1>
+	  <p>Có công mài sắt có ngày nên kim!</p> 
 	</div>
 	<div id='app' class="container">
 		<div class='card-columns' style="column-count:2">
@@ -45,17 +45,17 @@
 			    	<h3>Môn Hóa</h3>
 			    </div>
 		    </div>
-		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Hóa')">
+		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Toán')">
 			    <div class="card-body">
 			    	<h3>Môn Toán</h3>
 			    </div>
 		    </div>
-		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Hóa')">
+		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Lý')">
 			    <div class="card-body">
 			    	<h3>Môn Lý</h3>
 			    </div>
 		    </div>
-		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Hóa')">
+		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('help', 'Nhờ giải hộ')">
 			    <div class="card-body">
 			    	<h3>Nhờ giải hộ</h3>
 			    </div>

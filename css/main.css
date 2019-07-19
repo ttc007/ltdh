@@ -62,20 +62,38 @@
 .questionDiv p{
 	display: inline;
 }
-.questionDiv li:hover{
+.questionDiv li:hover, .questionDiv li.questionChoose{
 	cursor: pointer;
-	background: #fafafa;
+	background: #faffb3;
+	border-color: #ffc107;
 }
 .questionDiv li{
 	list-style-type: none;
 	padding: 5px;
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    width: 24%;
 }
 #answerDiv p{
 	display: block;
 }
 #answerDiv{
-	background: #d4edda;
-	padding: 5px;
+	background: #fafafa;
+	padding: 5px 15px;
 	margin-bottom: 5px;
-	color:#155724;
+	/*color:#155724;*/
+	border-radius: 5px;
+	border:1px solid #ddd; 
+}
+#msgResult{
+	background: #fafafa;
+	padding: 5px 15px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	border:1px solid #ddd;
+	display: none;
+	margin-top:50px;
+    font-size: 1.2em;
+    font-weight: 1000; 
 }

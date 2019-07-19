@@ -7,7 +7,7 @@
 	$type = filter_input(INPUT_GET, 'type');
 	$amount = filter_input(INPUT_GET, 'amount');
 
-	$sql= "SELECT question FROM questions WHERE subject = :subject AND chapter=:chapter AND type=:type LIMIT $amount";
+	$sql= "SELECT id,question FROM questions WHERE subject = :subject AND chapter=:chapter AND type=:type LIMIT $amount";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(
 		[

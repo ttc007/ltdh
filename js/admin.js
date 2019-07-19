@@ -6,7 +6,6 @@ function renderScreen(scrTitle){
 	
 	$("#app").append(`
 		<div class='' id='listQuestion'>
-
 			<div class='row'>
 				<div class='col-md-7'>
 					<select name='chapterFilter' class='form-control'>
@@ -141,10 +140,10 @@ function renderQuestForm(scrTitle, id){
 			<div class="form-group">
 				<label for="pwd">Choose</label>
 				<select name='choose' class='form-control'>
-					<option value='A'>A</option>
-					<option value='B'>B</option>
-					<option value='C'>C</option>
-					<option value='D'>D</option>
+					<option value='0'>A</option>
+					<option value='1'>B</option>
+					<option value='2'>C</option>
+					<option value='3'>D</option>
 				</select>
 			</div>
 			<a class="btn btn-info text-white" onclick='createQuestion("`+scrTitle+`")'>Add / Update</a>
