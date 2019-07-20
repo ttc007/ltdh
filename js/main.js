@@ -1,3 +1,14 @@
+var structure = [{"chapter":1,"type":"Theory","amount":3},{"chapter":1,"type":"Exercise","amount":4},
+{"chapter":2,"type":"Theory","amount":2},{"chapter":2,"type":"Exercise","amount":3},
+{"chapter":3,"type":"Theory","amount":1},{"chapter":3,"type":"Exercise","amount":6},
+{"chapter":4,"type":"Theory","amount":1},{"chapter":4,"type":"Exercise","amount":2},
+{"chapter":5,"type":"Theory","amount":3},{"chapter":5,"type":"Exercise","amount":2},
+{"chapter":6,"type":"Theory","amount":1},{"chapter":6,"type":"Theory","amount":3},
+{"chapter":7,"type":"Exercise","amount":2},{"chapter":7,"type":"Theory","amount":3},
+{"chapter":8,"type":"Exercise","amount":1},{"chapter":9,"type":"Exercise","amount":1},{"chapter":10,"type":"Exercise","amount":1}]
+
+console.log(JSON.stringify(structure));
+
 function renderScreen(scrName, scrTitle){
 	var loader = $("<div class='overlay'><div class='loader'></div></div>");
 	$("body").append(loader);
@@ -6,29 +17,29 @@ function renderScreen(scrName, scrTitle){
 	if(scrName=='home'){
 		$("#app").append(`
 			<div class='card-columns' style="column-count:2">
-				<div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Hóa')">
+				<div class="card bg-light text-dark text-center" onclick="renderScreen('Chemistry', 'Môn Hóa')">
 				    <div class="card-body">
 				    	<h3>Môn Hóa</h3>
 				    </div>
 			    </div>
-			    <div class="card bg-light text-dark text-center"  onclick="renderScreen('Chemistry', 'Môn Hóa')">
+			    <div class="card bg-light text-dark text-center" onclick="renderScreen('Math', 'Môn Toán')">
 				    <div class="card-body">
 				    	<h3>Môn Toán</h3>
 				    </div>
 			    </div>
-			    <div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Hóa')">
+			    <div class="card bg-light text-dark text-center" onclick="renderScreen('Physics', 'Môn Lý')">
 				    <div class="card-body">
 				    	<h3>Môn Lý</h3>
 				    </div>
 			    </div>
-			    <div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Hóa')">
+			    <div class="card bg-light text-dark text-center" onclick="renderScreen('bot', 'Bot')">
 				    <div class="card-body">
-				    	<h3>Nhờ giải hộ</h3>
+				    	<h3>Bot</h3>
 				    </div>
 			    </div>
 			</div>
 		`);
-	} else if(scrName=='help'){
+	} else if(scrName=='bot'){
 		$("#app").append(`Chúng tôi đang phát triển 1 con bot siêu thông minh có thể giải mọi bài toán cấp 3.`);
 	} else {
 		$("#app").append(`
@@ -156,34 +167,24 @@ function answerAction(answer, dataAnswer, scrName){
 	$(".questionDiv li").attr('title','');
 }
 
-
 //renderExamination
 
 function renderExamination(scrName){
 	var loader = $("<div class='overlay'><div class='loader'></div></div>");
 	$("body").append(loader);
-	var structures = [
-		{
-			'chapter' : 1, 
-			'type' : 'Theory',
-			'amount' : 1
+	var structures;
+	$.ajax({
+		url:"api/getStructure.php",
+		type:"GET",
+		async:false,
+		data:{
+			subject:scrName,
 		},
-		{
-			'chapter' : 2, 
-			'type' : 'Theory',
-			'amount' : 1
-		},
-		{
-			'chapter' : 3, 
-			'type' : 'Theory',
-			'amount' : 1
-		},
-		{
-			'chapter' : 3, 
-			'type' : 'Exercise',
-			'amount' : 1
+		dataType:'json',
+		success:function(data){
+			structures = JSON.parse(data);
 		}
-	];
+	})
 	var arrayResult = [];
 	$.each(structures, function(i, structure){
 		$.ajax({

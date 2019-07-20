@@ -2,6 +2,8 @@ function renderScreen(scrTitle){
 	var loader = $("<div class='overlay'><div class='loader'></div></div>");
 	$("body").append(loader);
 	$("#screenTitle").html(scrTitle);
+
+	
 	$("#app").empty();
 	
 	$("#app").append(`
@@ -10,23 +12,15 @@ function renderScreen(scrTitle){
 				<div class='col-md-7'>
 					<select name='chapterFilter' class='form-control'>
 						<option value=''></option>
-						<option value='1'>Chương 1: Sự điện li</option>
-						<option value='2'>Chương 2: Phi kim - Phân bón hóa học</option>
-						<option value='3'>Chương 3: Đại cương hóa hữu cơ. Hidrocacbon</option>
-						<option value='4'>Chương 4: Ancol - Phenol - Andehit - Axit Cacboxylic</option>
-						<option value='5'>Chương 5: Este - Lipit</option>
-						<option value='6'>Chương 6: Cacbohidrat</option>
-						<option value='7'>Chương 7: Amin - Amino Axit - Peptit - Protein </option>
-						<option value='8'>Chương 8: Polime</option>
-						<option value='9'>Chương 9: Đại cương Kim loại</option>
-						<option value='10'>Chương 10: Kim loại IA, IIA, A1, Fe, Cr</option>
-						<option value='11'>Chương 11: Nhận biết hóa học. Hóa học với vấn đề Kinh tế - Xã hội - Môi trường</option>
 					</select>
 				</div>
 				<div class='col-md-5'>
 					<button class='btn btn-info' onclick='filterQuestion("`+scrTitle+`")'><i class='fa fa-search'></i></button>
 					<button class='btn btn-primary' onclick='renderQuestForm("`+scrTitle+`")'><i class='fa fa-plus'></i></button>
 				</div>
+			</div>
+			<div>
+				<ul id='paginateUl'></ul>
 			</div>
 			<table class='table table-bordered mt-3'>
 				<tr>
@@ -44,6 +38,23 @@ function renderScreen(scrTitle){
 		</div>
 	`);
 	
+	$.ajax({
+		url:"api/listChapter.php",
+		type:"GET",
+		async:false,
+		data:{
+			subject:scrTitle
+		},
+		dataType:'json',
+		success:function(data){
+			$.each(data, function(i, chapter){
+				$("[name=chapterFilter]").append(`
+					<option value='`+chapter.chapter+`'>`+chapter.name+`</option>
+				`);
+			});
+		}
+	});
+
 	filterQuestion(scrTitle, 'noLoader');
 	setTimeout(function(){
 		loader.remove();
@@ -70,8 +81,12 @@ function filterQuestion(scrTitle, noLoader){
 		success:function(data){
 			$("#tableQuestion").empty();
 			$.each(data , function(i, v){
+				var isShow = "none";
+				if(i<10) isShow = 'table-row';
+
+				pageno = parseInt(i/10)+1;
 				$("#tableQuestion").append(`
-					<tr>
+					<tr style='display:`+isShow+`' pageno='`+pageno+`' class='trRow'>
 						<td>`+(i+1)+`</td>
 						<td>`+v.subject+`</td>
 						<td>`+v.chapter+`</td>
@@ -83,10 +98,37 @@ function filterQuestion(scrTitle, noLoader){
 					</tr>
 				`);
 			});
+			if(data.length>10) {
+				renderPaginate(parseInt(data.length/10)+1);
+				if($("#app").attr("pageno")!=undefined){
+					choosePage($("#app").attr("pageno"), 'noLoader');
+				}
+			}
 		}
 	});
 }
-
+function renderPaginate(pageLength){
+	for (var i = 1; i <= pageLength; i++) {
+		var active = "";
+		if( i == 1) active = 'active';
+		var li = $(`<li class='paginateLi `+active+`' pageno='`+i+`' onclick='choosePage(`+i+`)'>`+i+`</li>`);
+		$("#paginateUl").append(li);
+	}
+}
+function choosePage(pageno, noLoader){
+	if(noLoader!='noLoader'){
+		var loader = $("<div class='overlay'><div class='loader'></div></div>");
+		$("body").append(loader);
+		setTimeout(function(){
+			loader.remove();
+		}, 300);
+	}
+	$(".paginateLi").removeClass('active');
+	$(".paginateLi[pageno="+pageno+"]").addClass('active');
+	$(".trRow").css("display", 'none');
+	$(".trRow[pageno="+pageno+"]").css("display", 'table-row');
+	$("#app").attr('pageno', pageno);
+}
 function renderQuestForm(scrTitle, id){
 	var loader = $("<div class='overlay'><div class='loader'></div></div>");
 	$("body").append(loader);
@@ -99,17 +141,7 @@ function renderQuestForm(scrTitle, id){
 			<div class="form-group">
 				<label for="email">Chapter</label>
 				<select name='chapter' class='form-control'>
-					<option value='1'>Chương 1: Sự điện li</option>
-					<option value='2'>Chương 2: Phi kim - Phân bón hóa học</option>
-					<option value='3'>Chương 3: Đại cương hóa hữu cơ. Hidrocacbon</option>
-					<option value='4'>Chương 4: Ancol - Phenol - Andehit - Axit Cacboxylic</option>
-					<option value='5'>Chương 5: Este - Lipit</option>
-					<option value='6'>Chương 6: Cacbohidrat</option>
-					<option value='7'>Chương 7: Amin - Amino Axit - Peptit - Protein </option>
-					<option value='8'>Chương 8: Polime</option>
-					<option value='9'>Chương 9: Đại cương Kim loại</option>
-					<option value='10'>Chương 10: Kim loại IA, IIA, A1, Fe, Cr</option>
-					<option value='11'>Chương 11: Nhận biết hóa học. Hóa học với vấn đề Kinh tế - Xã hội - Môi trường</option>
+					
 				</select>
 			</div>
 			<div class="form-group">
@@ -152,6 +184,22 @@ function renderQuestForm(scrTitle, id){
 		</form>
 	`);
 
+	$.ajax({
+		url:"api/listChapter.php",
+		type:"GET",
+		async:false,
+		data:{
+			subject:scrTitle
+		},
+		dataType:'json',
+		success:function(data){
+			$.each(data, function(i, chapter){
+				$("[name=chapter]").append(`
+					<option value='`+chapter.chapter+`'>`+chapter.name+`</option>
+				`);
+			});
+		}
+	});
 	CKEDITOR.replace( 'question' );
 	CKEDITOR.replace( 'answer' );
 	if(id!=undefined){

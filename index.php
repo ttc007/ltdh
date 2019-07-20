@@ -24,13 +24,13 @@
 			  	<a class="nav-link" href="#" onclick="renderScreen('Chemistry', 'Môn Hóa')">Môn Hóa</a>
 			</li>
 			<li class="nav-item">
-			  	<a class="nav-link" href="#" onclick="renderScreen('', 'Môn Lý')">Môn Lý</a>
+			  	<a class="nav-link" href="#" onclick="renderScreen('Physics', 'Môn Lý')">Môn Lý</a>
 			</li>
 			<li class="nav-item">
-			  	<a class="nav-link" href="#" onclick="renderScreen('', 'Môn Toán')">Môn Toán</a>
+			  	<a class="nav-link" href="#" onclick="renderScreen('Math', 'Môn Toán')">Môn Toán</a>
 			</li>
 			<li class="nav-item">
-			  	<a class="nav-link" href="#" onclick="renderScreen('help', 'Nhờ giải hộ')">Nhờ giải hộ</a>
+			  	<a class="nav-link" href="#" onclick="renderScreen('bot', 'Bot')">Bot</a>
 			</li>
 		</ul>
 	</nav>
@@ -45,19 +45,19 @@
 			    	<h3>Môn Hóa</h3>
 			    </div>
 		    </div>
-		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Toán')">
+		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('Math', 'Môn Toán')">
 			    <div class="card-body">
 			    	<h3>Môn Toán</h3>
 			    </div>
 		    </div>
-		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('', 'Môn Lý')">
+		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('Physics', 'Môn Lý')">
 			    <div class="card-body">
 			    	<h3>Môn Lý</h3>
 			    </div>
 		    </div>
-		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('help', 'Nhờ giải hộ')">
+		    <div class="card bg-light text-dark text-center"  onclick="renderScreen('bot', 'Bot')">
 			    <div class="card-body">
-			    	<h3>Nhờ giải hộ</h3>
+			    	<h3>Bot</h3>
 			    </div>
 		    </div>
 		</div>

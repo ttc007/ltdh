@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 19, 2019 lúc 05:20 PM
+-- Thời gian đã tạo: Th7 20, 2019 lúc 01:26 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -21,6 +21,82 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `ltdh`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chapters`
+--
+
+CREATE TABLE `chapters` (
+  `id` int(11) NOT NULL,
+  `subject` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `chapter` smallint(5) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chapters`
+--
+
+INSERT INTO `chapters` (`id`, `subject`, `chapter`, `name`) VALUES
+(1, 'Chemistry', 1, 'Sự điện li'),
+(2, 'Chemistry', 2, 'Phi kim - Phân bón hóa học'),
+(3, 'Chemistry', 3, 'Đại cương hóa hữu cơ. Hidrocacbon'),
+(4, 'Chemistry', 4, 'Ancol - Phenol - Andehit - Axit Cacboxylic'),
+(5, 'Chemistry', 5, 'Este - Lipit'),
+(6, 'Chemistry', 6, 'Cacbohidrat'),
+(7, 'Chemistry', 7, 'Amin - Amino Axit - Peptit - Protein'),
+(8, 'Chemistry', 8, 'Polime'),
+(9, 'Chemistry', 9, 'Đại cương Kim loại'),
+(10, 'Chemistry', 10, 'Kim loại IA, IIA, A1, Fe, Cr'),
+(11, 'Chemistry', 11, 'Nhận biết hóa học. Hóa học với vấn đề Kinh tế - Xã hội - Môi trường'),
+(12, 'Physics', 1, 'Dao động cơ'),
+(13, 'Physics', 2, 'Sóng cơ'),
+(14, 'Physics', 3, 'Dòng điện xoay chiều'),
+(15, 'Physics', 4, 'Dao động điện từ'),
+(16, 'Physics', 5, 'Sóng ánh sáng'),
+(17, 'Physics', 6, 'Lượng tử ánh sáng'),
+(18, 'Physics', 7, 'Hạt nhân nguyên tử'),
+(19, 'Physics', 8, 'Điện tích - Điện trường'),
+(20, 'Physics', 9, 'Dòng điện không đổi'),
+(21, 'Physics', 10, 'Cảm ứng điện từ'),
+(22, 'Physics', 11, 'Mắt và các dụng cụ quang'),
+(23, 'Math', 1, 'Ứng dụng đạo hàm khảo sát hàm số'),
+(24, 'Math', 2, 'Mũ - Logarit'),
+(25, 'Math', 3, 'Nguyên hàm - Tích phân'),
+(26, 'Math', 4, 'Số phức'),
+(27, 'Math', 5, 'Lượng giác'),
+(28, 'Math', 6, 'Dãy số - Cấp số'),
+(29, 'Math', 7, 'Giới hạn'),
+(30, 'Math', 8, 'Phép biến hình'),
+(31, 'Math', 9, 'Quan hệ song song'),
+(32, 'Math', 10, 'Quan hệ vuông góc'),
+(33, 'Math', 11, 'Khối đa diện, thể tích khối đa diện'),
+(34, 'Math', 12, 'Khối xoay tròn, thể tích khối xoay tròn'),
+(35, 'Math', 13, 'Hình học giải tích Oxyz'),
+(36, 'Math', 14, 'Hình học giải tích Oxy'),
+(37, 'Math', 15, 'Tổ hợp - Xác suất'),
+(38, 'Biological', 1, 'L12 - P5 - C1: Cơ chế di truyền và biến dị'),
+(39, 'Biological', 2, 'L12 - P5 - C2: Tính quy luật của hiện tượng di truyền'),
+(40, 'Biological', 3, 'L12 - P5 - C3: Di truyền học quần thể'),
+(41, 'Biological', 4, 'L12 - P5 - C4: Ứng dụng di truyền học vào chọn giống'),
+(42, 'Biological', 5, 'L12 - P5 - C5: Di truyền học người'),
+(43, 'Biological', 6, 'L12 - P6: Tiến hóa'),
+(44, 'Biological', 7, 'L12 - P57: Sinh thái học'),
+(45, 'Biological', 8, 'L11 - P4 - C1: Chuyển hóa vật chất và năng lượng'),
+(46, 'English', 1, 'Pronunciation (Phát âm)'),
+(47, 'English', 2, 'Stress (Trọng âm)'),
+(48, 'English', 3, 'Sentence completion (Hoàn thành câu): Ngữ pháp + Từ vựng'),
+(49, 'English', 4, 'Closest meaning (Đồng nghĩa)'),
+(50, 'English', 5, 'Opposite meaning (Trái nghĩa)'),
+(51, 'English', 6, 'Communication (Câu giao tiếp)'),
+(52, 'English', 7, 'Error finding (Tìm lỗi sai)'),
+(53, 'English', 8, 'Sentence transformation (Biến đổi câu):  Chọn câu đồng nghĩa'),
+(54, 'English', 9, 'Sentence transformation (Biến đổi câu):Kết hợp câu'),
+(55, 'English', 10, 'Text completion (Hoàn thành đoạn văn)'),
+(56, 'English', 11, 'Reading comprehension (Đọc hiểu) - 5 sentence'),
+(57, 'English', 12, 'Reading comprehension (Đọc hiểu) - 8 sentence');
 
 -- --------------------------------------------------------
 
@@ -66,11 +142,38 @@ INSERT INTO `questions` (`id`, `subject`, `chapter`, `question`, `answer`, `choo
 (20, 'Chemistry', '8', '<p>Ph&aacute;t biểu n&agrave;o sau đ&acirc;y sai:</p>\n\n<ul>\n	<li>A. Cao su lưu h&oacute;a cấu tr&uacute;c mạch kh&ocirc;ng gian</li>\n	<li>B.&nbsp;Tơ nitron được điều chế bằng phản ứng tr&ugrave;ng ngưng</li>\n	<li>C. Tơ tằm thuộc loại tơ thi&ecirc;n nhi&ecirc;n</li>\n	<li>D. Tơ nitron 6,6 được điều chế bằng phản ứng tr&ugrave;ng ngưng</li>\n</ul>\n', '<p>B. Tơ nitron được điều chế bằng phản ứng tr&ugrave;ng ngưng</p>\n', '2', 0, 'Theory'),
 (21, 'Chemistry', '7', '<p>Cho 4,5 gam amin X ( no, đơn chức, mạch hở) t&aacute;c dụng hết với dd HCl dư, thu được 8,15 gam muối. Số nguy&ecirc;n tử Hidro trong ph&acirc;n tử X l&agrave;:</p>\n\n<ul>\n	<li>A. 11</li>\n	<li>B. 5</li>\n	<li>C. 9</li>\n	<li>D. 7</li>\n</ul>\n', '<p>C. 9</p>\n', '2', 0, 'Exercise'),
 (22, 'Chemistry', '3', '<p>Cho 54 gam Glucozơ l&ecirc;n men rươu với hiệu suất 75% thu được m gam C<sub>2</sub>H<sub>5</sub>OH . Gi&aacute; trị của m l&agrave;:</p>\n\n<ul>\n	<li>A. 36,80</li>\n	<li>B. 27,60</li>\n	<li>C. 20,70</li>\n	<li>D. 10,35</li>\n</ul>\n', '<p>C. 20,70</p>\n\n<p>B&agrave;i giải đang được cập nhật</p>\n', '2', 0, 'Exercise'),
-(23, 'Chemistry', '3', '<p>Tinh thể chất rắn X vị ngọt, kh&ocirc;ng m&agrave;u, dễ tan trong nước. X c&oacute; nhiều trong quả nho ch&iacute;n n&ecirc;n gọi l&agrave; đường nho. Khử chất hữu cơ X bằng H2 thu được chất hữu cơ Y. X, Y lần lượt l&agrave;:</p>\n\n<ul>\n	<li>A. Sacarozơ v&agrave; Glucozơ</li>\n	<li>B. Fructozơ v&agrave; Sobitol</li>\n	<li>C. Glucozơ v&agrave; Sobitol</li>\n	<li>D. Glucozơ v&agrave; Fructozơ&nbsp;</li>\n</ul>\n', '<p>C.&nbsp; Glucozơ v&agrave; Sobitol</p>\n', '2', 0, 'Theory');
+(23, 'Chemistry', '3', '<p>Tinh thể chất rắn X vị ngọt, kh&ocirc;ng m&agrave;u, dễ tan trong nước. X c&oacute; nhiều trong quả nho ch&iacute;n n&ecirc;n gọi l&agrave; đường nho. Khử chất hữu cơ X bằng H2 thu được chất hữu cơ Y. X, Y lần lượt l&agrave;:</p>\n\n<ul>\n	<li>A. Sacarozơ v&agrave; Glucozơ</li>\n	<li>B. Fructozơ v&agrave; Sobitol</li>\n	<li>C. Glucozơ v&agrave; Sobitol</li>\n	<li>D. Glucozơ v&agrave; Fructozơ&nbsp;</li>\n</ul>\n', '<p>C.&nbsp; Glucozơ v&agrave; Sobitol</p>\n', '2', 0, 'Theory'),
+(24, 'Physics', '1', '<p>Một vật dao động điều h&ograve;a theo phương tr&igrave;nh:&nbsp;&nbsp;<strong>x = Acos(&omega;t +&nbsp;&phi;)</strong>&nbsp;<strong>( A &gt; 0,&nbsp;&omega; &gt; 0 ). </strong>Pha của dao động ở thời điểm t l&agrave;:</p>\n\n<ul>\n	<li>A.&nbsp;&omega;</li>\n	<li>B<strong>.&nbsp;</strong>cos(&omega;t +&nbsp;&phi;)</li>\n	<li>C.&nbsp;&omega;t +&nbsp;&phi;</li>\n	<li>D.&nbsp;&phi;</li>\n</ul>\n', '<p>C.&nbsp;&nbsp;&omega;t +&nbsp;&phi;</p>\n', '2', 0, 'Theory');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `structures`
+--
+
+CREATE TABLE `structures` (
+  `id` int(11) NOT NULL,
+  `subject` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `structure` text COLLATE utf8mb4_vietnamese_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `structures`
+--
+
+INSERT INTO `structures` (`id`, `subject`, `structure`) VALUES
+(1, 'Chemistry', '[{\"chapter\":1,\"type\":\"Theory\",\"amount\":1},{\"chapter\":2,\"type\":\"Theory\",\"amount\":1},{\"chapter\":3,\"type\":\"Theory\",\"amount\":1},{\"chapter\":3,\"type\":\"Exercise\",\"amount\":1},{\"chapter\":5,\"type\":\"Theory\",\"amount\":4},{\"chapter\":5,\"type\":\"Exercise\",\"amount\":3},{\"chapter\":6,\"type\":\"Theory\",\"amount\":2},{\"chapter\":6,\"type\":\"Exercise\",\"amount\":1},{\"chapter\":7,\"type\":\"Theory\",\"amount\":3},{\"chapter\":7,\"type\":\"Exercise\",\"amount\":2},{\"chapter\":8,\"type\":\"Theory\",\"amount\":2},{\"chapter\":9,\"type\":\"Theory\",\"amount\":3},{\"chapter\":9,\"type\":\"Exercise\",\"amount\":2},{\"chapter\":10,\"type\":\"Theory\",\"amount\":7},{\"chapter\":10,\"type\":\"Exercise\",\"amount\":5},{\"chapter\":11,\"type\":\"Theory\",\"amount\":2}]'),
+(2, 'Physics', '[{\"chapter\":1,\"type\":\"Theory\",\"amount\":3},{\"chapter\":1,\"type\":\"Exercise\",\"amount\":4},{\"chapter\":2,\"type\":\"Theory\",\"amount\":2},{\"chapter\":2,\"type\":\"Exercise\",\"amount\":3},{\"chapter\":3,\"type\":\"Theory\",\"amount\":1},{\"chapter\":3,\"type\":\"Exercise\",\"amount\":6},{\"chapter\":4,\"type\":\"Theory\",\"amount\":1},{\"chapter\":4,\"type\":\"Exercise\",\"amount\":2},{\"chapter\":5,\"type\":\"Theory\",\"amount\":3},{\"chapter\":5,\"type\":\"Exercise\",\"amount\":2},{\"chapter\":6,\"type\":\"Theory\",\"amount\":1},{\"chapter\":6,\"type\":\"Theory\",\"amount\":3},{\"chapter\":7,\"type\":\"Exercise\",\"amount\":2},{\"chapter\":7,\"type\":\"Theory\",\"amount\":3},{\"chapter\":8,\"type\":\"Exercise\",\"amount\":1},{\"chapter\":9,\"type\":\"Exercise\",\"amount\":1},{\"chapter\":10,\"type\":\"Exercise\",\"amount\":1}]');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `chapters`
+--
+ALTER TABLE `chapters`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `questions`
@@ -79,14 +182,32 @@ ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `structures`
+--
+ALTER TABLE `structures`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
+
+--
+-- AUTO_INCREMENT cho bảng `chapters`
+--
+ALTER TABLE `chapters`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT cho bảng `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT cho bảng `structures`
+--
+ALTER TABLE `structures`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

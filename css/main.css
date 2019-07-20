@@ -1,5 +1,13 @@
 .navbar-nav{
-	font-size: 1.2em
+	font-size: 1em;
+	font-weight: 600;
+
+}
+.nav-item {
+    padding: 5px 10px!important;
+}
+.navbar-nav a{
+	color: #fff!important;
 }
 .nav-item{
 	padding: 0 10px;
@@ -96,4 +104,21 @@
 	margin-top:50px;
     font-size: 1.2em;
     font-weight: 1000; 
+}
+#paginateUl{
+	list-style-type: none;
+	margin-top: 30px;
+	padding-left: 0;
+}
+#paginateUl li{
+	display: inline-block;
+	padding: 5px 15px;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	cursor: pointer;
+	margin-right: 7px;
+}
+#paginateUl li.active{
+	color: #fff;
+	background: #2d75bd;
 }

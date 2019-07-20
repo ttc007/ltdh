@@ -13,6 +13,7 @@
 	<script src="ckeditor/ckeditor.js"></script>
 
 	<script src="js/admin.js"></script>
+	<script src="js/adminChapter.js"></script>
 	<link rel="stylesheet" href="css/main.css">
 
 </head>
@@ -20,7 +21,7 @@
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-			  	<a class="nav-link" href="index.php"><span class="fa fa-home"></span></a>
+			  	<a class="nav-link" href=""><span class="fa fa-home"></span></a>
 			</li>
 			<li class="nav-item">
 			  	<a class="nav-link" href="#" onclick="renderScreen('Chemistry')">Chemistry</a>
@@ -57,9 +58,14 @@
 			    	<h3>Physics</h3>
 			    </div>
 		    </div>
-		    <div class="card bg-light text-dark text-center" onclick="renderScreen('Relief valve')">
+		    <div class="card bg-light text-dark text-center" onclick="renderScreen('Bot')">
 			    <div class="card-body">
 			    	<h3>Relief valve</h3>
+			    </div>
+		    </div>
+		    <div class="card bg-light text-dark text-center" onclick="renderScreenChapter()">
+			    <div class="card-body">
+			    	<h3>Chapter</h3>
 			    </div>
 		    </div>
 		</div>
